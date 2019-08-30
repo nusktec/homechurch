@@ -6,6 +6,9 @@ import Errors from './views/Errors.vue';
 import LoginView from './views/Login.vue';
 import HomeView from './views/PersonalBlog.vue';
 
+//ThirdParty library
+import data from './data';
+
 Vue.use(Router);
 
 export default new Router({
@@ -25,10 +28,15 @@ export default new Router({
       name: 'login',
       component: LoginView,
     },
+    //main application
     {
       path: '/',
       component: MainLayout,
       redirect: '/profile',
+      beforeEnter: (req, res, next) => {
+        console.log(res);
+        next();
+      },
       children: [
         {
           path: '/profile',
