@@ -16,7 +16,9 @@
     "shards-vue": "^1.0.4",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
+    "vue-headful": "^2.0.1",
     "vue-router": "^3.0.1",
+    "vue-top-progress": "^0.7.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

@@ -1,6 +1,8 @@
 /* eslint-disable */
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import vueHeadful from 'vue-headful';
+import vueTopProgress from 'vue-top-progress';
 
 import Vue from 'vue';
 import ShardsVue from 'shards-vue';
@@ -16,8 +18,9 @@ import router from './router';
 import store from './store';
 
 ShardsVue.install(Vue);
-//use axios library here
-Vue.use(VueAxios, axios);
+Vue.use(VueAxios, axios); //use axios library here
+Vue.use(vueHeadful, { component: true }); // use vue-head-full for meta
+Vue.use(vueTopProgress); //use top progressbar
 
 //Begin configurations
 Vue.config.productionTip = false;

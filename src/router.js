@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 //New Import views
-import MainLayout from './layouts/Default.vue';
-import Errors from './views/Errors.vue';
-import LoginView from './views/Login.vue';
-import HomeView from './views/PersonalBlog.vue';
+import MainLayout from './layouts/Default';
+import Errors from './views/Errors';
+import LoginView from './views/Login';
+import UserProfileView from './views/UserProfile';
 
 //ThirdParty library
 import data from './data';
@@ -34,14 +34,40 @@ export default new Router({
       component: MainLayout,
       redirect: '/profile',
       beforeEnter: (req, res, next) => {
-        console.log(res);
+        console.log(req);
         next();
       },
       children: [
         {
           path: '/profile',
           name: 'profile',
-          component: HomeView
+          component: UserProfileView,
+          meta: {
+            title: 'Profile',
+            isAdmin: false,
+          }
+        },
+      ]
+    },
+    //Admin Routes
+    {
+      path: '/admin',
+      component: MainLayout,
+      redirect: '/admin/dashboard',
+      meta: { isAdmin: true },
+      beforeEnter: (req, res, next) => {
+        console.log(res);
+        next();
+      },
+      children: [
+        {
+          path: '/admin/dashboard',
+          name: 'dashboard',
+          component: UserProfileView,
+          meta: {
+            isAdmin: true,
+            title: 'Admin'
+          }
         },
       ]
     },

@@ -6,5 +6,6 @@ export default function () {
       to: {
         name: 'profile',
       },
+      meta: { isAdmin: false }
     }];
 }
