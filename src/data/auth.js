@@ -12,6 +12,12 @@ class Auth {
     return localStorage.getItem(USER_KEY) ? localStorage.getItem(USER_KEY) : false;
   }
 
+  //check auth role
+  static isAdminRole() {
+    let role = JSON.parse(localStorage.getItem(USER_KEY));
+    return role.isAdmin;
+  }
+
   // set login data
   static setLogin(data) {
     localStorage.setItem(USER_KEY, data);

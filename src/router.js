@@ -34,8 +34,10 @@ export default new Router({
       component: MainLayout,
       redirect: '/profile',
       beforeEnter: (req, res, next) => {
-        console.log(req);
-        next();
+        if (data.auth.isLogin() && !data.auth.isAdminRole()) {
+          next();
+        }
+        next({ name: 'login' });
       },
       children: [
         {
@@ -56,8 +58,10 @@ export default new Router({
       redirect: '/admin/dashboard',
       meta: { isAdmin: true },
       beforeEnter: (req, res, next) => {
-        console.log(res);
-        next();
+        if (data.auth.isLogin() && data.auth.isAdminRole()) {
+          next();
+        }
+        next({ name: 'login' });
       },
       children: [
         {
