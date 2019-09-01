@@ -1,13 +1,15 @@
 <template>
-  <d-container fluid class="main-content-container px-4 pb-4">
-    <!-- Error -->
-    <div class="error">
-      <div class="error__content">
-        <h2>500</h2>
-        <h3>Something went wrong!</h3>
-        <p>There was a problem on our end. Please try again later.</p>
-        <d-button pill>&larr; Go Back</d-button>
-      </div>
-    </div>
-  </d-container>
+    <d-container fluid class="main-content-container px-4 pb-4">
+        <!-- Error -->
+        <div class="error">
+            <div class="error__content">
+                <img width="300" src="@/assets/images/404-image-error.png" alt="404 Image"/>
+                <h3>Something went wrong !</h3>
+                <p>Maybe on our end or link is broken. Please try again later.</p>
+                <router-link to="/">
+                <d-button size="sm" pill>&larr; Go Back</d-button>
+                </router-link>
+            </div>
+        </div>
+    </d-container>
 </template>

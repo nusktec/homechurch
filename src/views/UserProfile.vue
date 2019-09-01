@@ -22,12 +22,10 @@
 <script>
 import UserDetails from '@/components/user-profile-lite/UserDetails.vue';
 import UserAccountDetails from '@/components/user-profile-lite/UserAccountDetails.vue';
-import VueHeadful from 'vue-headful';
 
 export default {
   name: 'user-profile-lite',
   components: {
-    VueHeadful,
     uplUserDetails: UserDetails,
     uplUserAccountDetails: UserAccountDetails,
   },

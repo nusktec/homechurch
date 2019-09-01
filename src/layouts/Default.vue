@@ -1,5 +1,6 @@
 <template>
     <d-container fluid>
+        <notifications group="alert"/>
         <vue-topprogress ref="topProgress"></vue-topprogress>
         <Meta-Data :title='title'/>
         <d-row>

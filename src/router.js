@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 //New Import views
+import Test from './views/rough/ComponentsOverview';
 import MainLayout from './layouts/Default';
+import PlainLayout from './layouts/PlainLayout';
 import Errors from './views/Errors';
 import LoginView from './views/Login';
 import UserProfileView from './views/UserProfile';
@@ -24,9 +26,28 @@ export default new Router({
   },
   routes: [
     {
-      path: '/login',
-      name: 'login',
-      component: LoginView,
+      path: '/test',
+      name: 'test',
+      component: Test,
+      meta: { title: 'test' }
+    },
+    {
+      path: '/',
+      component: PlainLayout,
+      children: [
+        {
+          path: '/login',
+          name: 'login',
+          component: LoginView,
+          meta: { title: 'Login' }
+        },
+        {
+          path: '/register',
+          name: 'register',
+          component: LoginView,
+          meta: { title: 'Register' }
+        }
+      ]
     },
     //main application
     {
