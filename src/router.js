@@ -34,6 +34,7 @@ export default new Router({
     {
       path: '/',
       component: PlainLayout,
+      redirect: '/login',
       children: [
         {
           path: '/login',

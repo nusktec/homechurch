@@ -1,5 +1,5 @@
 <template>
-    <d-container fluid class="main-content-container px-4 pb-lg-5" style="background-color: #2c2f44">
+    <d-container fluid class="main-content-container px-4 pb-lg-5 py-5" style="background-color: #2c2f44">
         <div class="error">
             <div class="error__content">
                 <d-card class="card-small">
