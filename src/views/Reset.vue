@@ -1,5 +1,5 @@
 <template>
-    <d-container fluid class="main-content-container px-4 pb-lg-5 py-5" style="background-color: #2c2f44">
+    <d-container fluid class="main-content-container px-2 pb-lg-5" style="background-color: #2c2f44">
         <!-- Error -->
         <vue-headful title="DHC | Login"/>
         <div class="error">
@@ -12,28 +12,21 @@
                         <p class="m-0">Create an account</p>
                     </d-card-header>
 
-                    <d-list-group>
+                    <d-list-group flush>
                         <d-list-group-item class="px-lg-5">
                             <d-form onsubmit="return false">
                                 <!-- Dropdown Input Groups -->
                                 <d-input-group prepend="<i class='fa fa-user'/>" class="mb-3">
                                     <d-input type="text" placeholder="Full Name"/>
                                 </d-input-group>
-                                <d-input-group prepend="<i class='fa fa-phone'/>" class="mb-3">
+                                <d-input-group prepend="<i class='fa fa-user'/>" class="mb-3">
                                     <d-input type="text" placeholder="Phone"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-envelope'/>" class="mb-3">
                                     <d-input type="email" placeholder="Email"/>
                                 </d-input-group>
-                                <d-input-group prepend="<i class='fa fa-globe'/>" class="mb-3">
-                                    <country-select className="form-control" v-model="country" :country="country" topCountry="US" />
-                                    <region-select className="form-control" v-model="region" :country="country" :region="region" />
-                                </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-key'/>" class="mb-3">
                                     <d-input type="password" placeholder="Password"/>
-                                </d-input-group>
-                                <d-input-group prepend="<i class='fa fa-key'/>" class="mb-3">
-                                    <d-input type="password" placeholder="Re-enter password"/>
                                 </d-input-group>
                                 <d-input-group>
                                     <d-btn v-on:click="onSubmit" class="btn-block">Register</d-btn>
@@ -54,12 +47,6 @@
 
   export default {
     components: { VueHeadful },
-    data(){
-      return{
-        country: '',
-        region: ''
-      }
-    },
     methods: {
       onSubmit: () => {
         //alert('Hello !');

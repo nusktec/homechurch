@@ -6,6 +6,7 @@ import MainLayout from './layouts/Default';
 import PlainLayout from './layouts/PlainLayout';
 import Errors from './views/Errors';
 import LoginView from './views/Login';
+import RegisterView from './views/Register';
 import UserProfileView from './views/UserProfile';
 
 //ThirdParty library
@@ -45,8 +46,14 @@ export default new Router({
         {
           path: '/register',
           name: 'register',
-          component: LoginView,
+          component: RegisterView,
           meta: { title: 'Register' }
+        },
+        {
+          path: '/reset',
+          name: 'reset',
+          component: RegisterView,
+          meta: { title: 'Reset' }
         }
       ]
     },
