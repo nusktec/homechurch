@@ -5,7 +5,7 @@
                 <div class="col-lg-6 col-md-12 text-center align-items-center" style="background-color: #2c2f44; overflow: hidden">
                     <h1 style="font-family: Lobster" class="text-white my-5">Greeting, You !</h1>
                     <h3 style="font-family: Sofia" class="text-white my-2">Dunamis Online</h3>
-                    <h3 style="font-family: Lexend Deca" class="text-white my-2">Home Cell</h4>
+                    <h4 style="font-family: Lexend Deca" class="text-white my-2">Home Cell</h4>
                     <img style="height: 100px;" class="my-3" src="images/connectivity-image.png" alt="Connectivity Image">
                 </div>
                 <div class="col-lg-6 col-md-12">
