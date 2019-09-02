@@ -18,13 +18,20 @@
                             <d-form onsubmit="return false">
                                 <!-- Dropdown Input Groups -->
                                 <d-input-group prepend="<i class='fa fa-user'/>" class="mb-3">
-                                    <d-input type="text" placeholder="Full Name"/>
+                                    <d-input v-model="fullName" type="text" placeholder="Full Name"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-phone'/>" class="mb-3">
-                                    <d-input type="text" placeholder="Phone"/>
+                                    <d-input v-model="phone" type="text" placeholder="Phone"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-envelope'/>" class="mb-3">
-                                    <d-input type="email" placeholder="Email"/>
+                                    <d-input v-model="email" type="email" placeholder="Email"/>
+                                </d-input-group>
+                                <d-input-group prepend="<i class='fa fa-venus-mars'/>" class="mb-3">
+                                    <d-select v-model="sex">
+                                        <option>-Select Sex-</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </d-select>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-globe'/>" class="mb-3">
                                     <country-select className="form-control" v-model="country" :country="country"
@@ -33,10 +40,10 @@
                                                    :region="region"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-key'/>" class="mb-3">
-                                    <d-input type="password" placeholder="Password"/>
+                                    <d-input v-model="pass1" type="password" placeholder="Password"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-key'/>" class="mb-3">
-                                    <d-input type="password" placeholder="Re-enter password"/>
+                                    <d-input v-model="pass2" type="password" placeholder="Re-enter password"/>
                                 </d-input-group>
                                 <d-input-group>
                                     <d-btn v-on:click="onSubmit" class="btn-block btn-danger">Register</d-btn>
@@ -53,6 +60,7 @@
     </d-container>
 </template>
 <script>
+  import Util from './../utils';
   import VueHeadful from 'vue-headful';
   import validator from 'validator';
 
@@ -60,10 +68,10 @@
     components: { VueHeadful },
     data() {
       return {
-        title: this.$router.currentRoute.meta.title,
         fullName: '',
         phone: '',
         email: '',
+        sex: '',
         country: '',
         region: '',
         pass1: '',
@@ -71,10 +79,39 @@
       };
     },
     methods: {
-      onSubmit: () => {
-        //alert('Hello !');
-        alert(validator.isEmail('hello'));
-      }
+      onSubmit: filterSubmit
     }
   };
+
+  //filter and submit
+  function filterSubmit() {
+    if (!validator.isLength(this.fullName, {
+      min: 5,
+      max: 100
+    })) {
+      Util.Util.alertBox(this, '', 'Invalid full name format or blank.', 'warn', 3000);
+      return;
+    }
+    if (!validator.isMobilePhone(this.phone)) {
+      Util.Util.alertBox(this, '', 'Invalid phone format or blank.', 'warn', 3000);
+      return;
+    }
+    if (!validator.isEmail(this.email)) {
+      Util.Util.alertBox(this, '', 'Invalid email format or blank.', 'warn', 3000);
+      return;
+    }
+    if (validator.isEmpty(this.sex)) {
+      Util.Util.alertBox(this, '', 'Select sex.', 'warn', 3000);
+      return;
+    }
+    if (validator.isEmpty(this.country) || validator.isEmpty(this.region)) {
+      Util.Util.alertBox(this, '', 'Please select country and region.', 'warn', 3000);
+      return;
+    }
+    if (validator.isEmpty(this.pass1) || validator.isEmpty(this.pass2)) {
+      Util.Util.alertBox(this, '', 'Please enter password and confirm.', 'warn', 3000);
+      return;
+    }
+    //Start submission
+  }
 </script>
