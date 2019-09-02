@@ -7,6 +7,7 @@ import PlainLayout from './layouts/PlainLayout';
 import Errors from './views/Errors';
 import LoginView from './views/Login';
 import RegisterView from './views/Register';
+import ResetView from './views/Reset';
 import UserProfileView from './views/UserProfile';
 
 //ThirdParty library
@@ -52,7 +53,7 @@ export default new Router({
         {
           path: '/reset',
           name: 'reset',
-          component: RegisterView,
+          component: ResetView,
           meta: { title: 'Reset' }
         }
       ]

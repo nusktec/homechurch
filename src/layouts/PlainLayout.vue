@@ -8,14 +8,15 @@
 </template>
 <script>
   import MetaData from './../components/extra/MetaData';
-    export default {
-      components: {
-        MetaData,
-      },
-      data(){
-        return{
-          title: this.$router.currentRoute.meta.title
-        }
-      }
+
+  export default {
+    components: {
+      MetaData,
+    },
+    data() {
+      return {
+        title: this.$router.currentRoute.meta.title
+      };
     }
+  };
 </script>
