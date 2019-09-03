@@ -63,6 +63,7 @@
   import Util from './../utils';
   import VueHeadful from 'vue-headful';
   import validator from 'validator';
+  import data from './../data';
 
   export default {
     components: { VueHeadful },
@@ -84,7 +85,7 @@
   };
 
   //filter and submit
-  function filterSubmit() {
+  function filterSubmit(e) {
     if (!validator.isLength(this.fullName, {
       min: 5,
       max: 100
@@ -112,6 +113,19 @@
       Util.Util.alertBox(this, '', 'Please enter password and confirm.', 'warn', 3000);
       return;
     }
-    //Start submission
+    //check for password equality
+    if (!validator.equals(this.pass1, this.pass2)) {
+      Util.Util.alertBox(this, '', 'Password not the same.', 'warn', 3000);
+      return;
+    }
+    let controller = new data.apiCaller(this);
+    controller.CreateAccount(this.$data, (res, msg) => {
+      if (res) {
+        //success
+        Util.Util.alertBox(this, '', msg, 'info', 3000);
+        return;
+      }
+      Util.Util.alertBox(this, '', msg, 'warn', 3000);
+    });
   }
 </script>

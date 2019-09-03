@@ -6,7 +6,7 @@
  Phone: 2348164242320
  **/
 import apiCaller from './apiCaller';
-import apiConstant from './apiConstant';
+import apis from './apiConstant';
 import auth from './auth';
 
-export default {auth, apiConstant, apiCaller};
+export default {auth, apis, apiCaller};

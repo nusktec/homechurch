@@ -4,9 +4,9 @@
  Email: nusktecsoft@gmail.com
  Phone: 2348164242320
  **/
-class apiConstant {
-
-}
-
+const API_URL = 'http://localhost:3000/api';
 // export default
-export default apiConstant;
+let Apis = {
+  createUser: API_URL + '/auth/create',
+};
+export default Apis;
