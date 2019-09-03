@@ -1,7 +1,7 @@
 <template>
-    <d-container fluid class="px-4 pb-lg-5 py-5">
+    <d-container fluid class="px-lg-4 pb-lg-5 py-lg-5">
         <div class="d-flex justify-content-center my-lg-5">
-            <div class="row shadow" style="background-color: white; border-radius: 10px; overflow: hidden; width: 700px">
+            <div class="row shadow" style="background-color: white; border-radius: 1px; overflow: hidden; width: 700px">
                 <div class="col-lg-6 col-md-12 text-center align-items-center" style="background-color: #2c2f44; overflow: hidden">
                     <h1 style="font-family: Lobster" class="text-white my-5">Greeting, You !</h1>
                     <h3 style="font-family: Sofia" class="text-white my-2">Dunamis Online</h3>
