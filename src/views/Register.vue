@@ -118,14 +118,20 @@
       Util.Util.alertBox(this, '', 'Password not the same.', 'warn', 3000);
       return;
     }
+    //set data progress to disabled
+    Util.Util.alertBox(this, '', 'Please wait, processing registration...', 'info', 3000);
     let controller = new data.apiCaller(this);
-    controller.CreateAccount(this.$data, (res, msg) => {
-      if (res) {
+    controller.createAccount(this.$data, (data) => {
+      if (data) {
         //success
-        Util.Util.alertBox(this, '', msg, 'info', 3000);
+        if(data.status){
+          Util.Util.alertBox(this, '', 'Registration was successful, click <strong><a style="color: white" href="/login">Here</a></strong> to login now', 'success', 15000);
+        }else {
+          Util.Util.alertBox(this, '', data.msg, 'warn', 3000);
+        }
         return;
       }
-      Util.Util.alertBox(this, '', msg, 'warn', 3000);
+      Util.Util.alertBox(this, '', data.msg, 'warn', 3000);
     });
   }
 </script>

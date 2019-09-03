@@ -68,13 +68,7 @@
     });
     if (valEmail && valPassword) {
       //submit
-      util.Util.alertBox(this, 'Login', 'Processing...', 'info', 5000);
-      this.loading = true;
-      this.axios.get('http://google.com', (res) => {
-        console.log(res);
-      });
-      //release from loading
-      this.loading = false;
+
       return;
     }
     //show warning

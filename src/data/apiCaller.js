@@ -6,6 +6,7 @@
  **/
 import dc from './apiConstant';
 
+const logger = true;
 let context = null;
 
 class apiCaller {
@@ -14,14 +15,23 @@ class apiCaller {
   }
 
   //sign up functions
-  CreateAccount(data, callback) {
-    context.axios.post(dc.createUser, data, (res) => {
-      callback(res);
-    }, err => {
-      callback(false, 'An error has occur, Please try again...');
-    });
+  createAccount(data, callback) {
+    context.axios.post(dc.createUser, data)
+      .then(res => {
+        callback(res.data);
+      })
+      .catch(err => {
+        logs(err);
+        callback(false, 'An error has occur, Please try again...');
+      });
   }
+}
 
+//logger expo
+function logs(data) {
+  if (logger) {
+    console.log(data);
+  }
 }
 
 // export default
