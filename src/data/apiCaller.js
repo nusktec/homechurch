@@ -25,6 +25,18 @@ class apiCaller {
         callback(false, 'An error has occur, Please try again...');
       });
   }
+
+  //functions for login
+  loginAccount(data, callback) {
+    context.axios.post(dc.loginUser, data)
+      .then(res => {
+        callback(res);
+      })
+      .catch(err => {
+        logs(err);
+        callback(false);
+      });
+  }
 }
 
 //logger expo

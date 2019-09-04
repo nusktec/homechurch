@@ -9,5 +9,6 @@ const API_URL = 'http://localhost:3000/api';
 // export default
 let Apis = {
   createUser: API_URL + '/auth/create/?ssk=' + SSK,
+  loginUser: API_URL + '/auth/login/?ssk=' + SSK,
 };
 export default Apis;

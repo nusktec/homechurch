@@ -129,13 +129,15 @@
       if (data) {
         //success
         if(data.status){
-          Util.Util.alertBox(this, '', 'Registration was successful, click <strong><a style="color: white" href="/login">Here</a></strong> to login now', 'success', 15000);
+          Util.Util.alertBox(this, '', 'Registration was successful, click <a class="btn btn-info" style="color: white" href="/login">Here</a> to login now', 'success', 15000);
         }else {
           Util.Util.alertBox(this, '', data.msg, 'warn', 3000);
+          this.disabled = false;
         }
         return;
       }
       Util.Util.alertBox(this, '', data.msg, 'warn', 3000);
+      this.disabled = false;
     });
   }
 </script>

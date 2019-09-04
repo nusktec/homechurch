@@ -72,6 +72,6 @@
       return;
     }
     //show warning
-    util.Util.alertBox(this, 'Login', 'Some fields were blank or in-appropriate data supplied...', 'warn', 5000);
+    util.Util.alertBox(this, '', 'Some fields were blank or in-appropriate data supplied...', 'warn', 5000);
   }
 </script>
