@@ -30,7 +30,7 @@ class apiCaller {
   loginAccount(data, callback) {
     context.axios.post(dc.loginUser, data)
       .then(res => {
-        callback(res);
+        callback(res.data);
       })
       .catch(err => {
         logs(err);

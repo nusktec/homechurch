@@ -2,11 +2,13 @@
     <d-container fluid class="px-lg-4 pb-lg-5 py-lg-5">
         <div class="d-flex justify-content-center my-lg-5">
             <div class="row shadow" style="background-color: white; border-radius: 1px; overflow: hidden; width: 700px">
-                <div class="col-lg-6 col-md-12 text-center align-items-center" style="background-color: #2c2f44; overflow: hidden">
+                <div class="col-lg-6 col-md-12 text-center align-items-center"
+                     style="background-color: #2c2f44; overflow: hidden">
                     <h1 style="font-family: Lobster" class="text-white my-5">Greeting, You !</h1>
                     <h3 style="font-family: Sofia" class="text-white my-2">Dunamis Online</h3>
                     <h4 style="font-family: Lexend Deca" class="text-white my-2">Home Cell</h4>
-                    <img style="height: 100px;" class="my-3" src="images/connectivity-image.png" alt="Connectivity Image">
+                    <img style="height: 100px;" class="my-3" src="images/connectivity-image.png"
+                         alt="Connectivity Image">
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <d-list-group>
@@ -44,6 +46,7 @@
   import VueHeadful from 'vue-headful';
   import validator from 'validator';
   import util from './../utils';
+  import data from './../data';
 
   export default {
     components: { VueHeadful },
@@ -68,7 +71,21 @@
     });
     if (valEmail && valPassword) {
       //submit
-
+      this.loading = true;
+      let dc = new data.apiCaller(this);
+      dc.loginAccount(this.$data, (res) => {
+        this.loading = false;
+        console.log(res);
+        if (res && res.status) {
+          //login has begin
+          util.Util.alertBox(this, '', res.msg, 'success', 3000);
+          data.auth.setLogin(JSON.stringify(res.data));
+          //Profile leading
+          this.$router.push({ name: 'profile' });
+        } else {
+          util.Util.alertBox(this, '', res.msg, 'warn', 5000);
+        }
+      });
       return;
     }
     //show warning

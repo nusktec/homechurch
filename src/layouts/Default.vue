@@ -50,7 +50,7 @@
       this.$refs.topProgress.start();
       setTimeout(() => {
         this.$refs.topProgress.done();
-      }, 2000);
+      }, 1000);
     }
   };
 </script>

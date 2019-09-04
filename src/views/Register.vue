@@ -18,7 +18,8 @@
                             <d-form onsubmit="return false">
                                 <!-- Dropdown Input Groups -->
                                 <d-input-group prepend="<i class='fa fa-user'/>" class="mb-3">
-                                    <d-input :disabled="disabled" v-model="fullName" type="text" placeholder="Full Name"/>
+                                    <d-input :disabled="disabled" v-model="fullName" type="text"
+                                             placeholder="Full Name"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-phone'/>" class="mb-3">
                                     <d-input :disabled="disabled" v-model="phone" type="phone" placeholder="Phone"/>
@@ -34,17 +35,22 @@
                                     </d-select>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-globe'/>" class="mb-3">
-                                    <country-select :disabled="disabled" className="form-control" v-model="country" :country="country"
+                                    <country-select :disabled="disabled" className="form-control" v-model="country"
+                                                    :country="country"
                                                     topCountry="NG"></country-select>
-                                    <region-select :disabled="disabled" className="form-control" v-model="region" :country="country"
+                                    <region-select :disabled="disabled" className="form-control" v-model="region"
+                                                   :country="country"
                                                    :region="region"/>
-                                    <d-input :disabled="disabled" v-model="street" type="text" placeholder="Street (Name, No)"/>
+                                    <d-input :disabled="disabled" v-model="street" type="text"
+                                             placeholder="Street (Name, No)"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-key'/>" class="mb-3">
-                                    <d-input :disabled="disabled" v-model="pass1" type="password" placeholder="Password"/>
+                                    <d-input :disabled="disabled" v-model="pass1" type="password"
+                                             placeholder="Password"/>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-key'/>" class="mb-3">
-                                    <d-input :disabled="disabled" v-model="pass2" type="password" placeholder="Re-enter password"/>
+                                    <d-input :disabled="disabled" v-model="pass2" type="password"
+                                             placeholder="Re-enter password"/>
                                 </d-input-group>
                                 <d-input-group>
                                     <d-btn v-on:click="onSubmit" class="btn-block btn-danger">Register</d-btn>
@@ -128,9 +134,16 @@
     controller.createAccount(this.$data, (data) => {
       if (data) {
         //success
-        if(data.status){
+        if (data.status) {
           Util.Util.alertBox(this, '', 'Registration was successful, click <a class="btn btn-info" style="color: white" href="/login">Here</a> to login now', 'success', 15000);
-        }else {
+          setTimeout(() => {
+            let sucssdata = 'Account Registration~Thank you, your registration went well~Login Now~/login';
+            this.$router.push({
+              name: 'success',
+              query: { data: btoa(sucssdata) }
+            });
+          }, 1000);
+        } else {
           Util.Util.alertBox(this, '', data.msg, 'warn', 3000);
           this.disabled = false;
         }

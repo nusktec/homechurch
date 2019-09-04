@@ -5,6 +5,7 @@ import Test from './views/rough/ComponentsOverview';
 import MainLayout from './layouts/Default';
 import PlainLayout from './layouts/PlainLayout';
 import Errors from './views/Errors';
+import SuccessView from './views/Success';
 import LoginView from './views/Login';
 import RegisterView from './views/Register';
 import ResetView from './views/Reset';
@@ -37,6 +38,15 @@ export default new Router({
       path: '/',
       component: PlainLayout,
       redirect: '/login',
+      beforeEnter: (req, res, next) => {
+        if (data.auth.isLogin() && !data.auth.isAdminRole()) {
+          next({ name: 'profile' });
+        } else if (data.auth.isLogin() && data.auth.isAdminRole()) {
+          next({ name: 'dashboard' });
+        } else {
+          next();
+        }
+      },
       children: [
         {
           path: '/login',
@@ -66,8 +76,9 @@ export default new Router({
       beforeEnter: (req, res, next) => {
         if (data.auth.isLogin() && !data.auth.isAdminRole()) {
           next();
+        } else {
+          next({ name: 'login' });
         }
-        next({ name: 'login' });
       },
       children: [
         {
@@ -105,7 +116,12 @@ export default new Router({
         },
       ]
     },
-    //Error handling
+    //Error and success handling
+    {
+      path: '/success',
+      name: 'success',
+      component: SuccessView,
+    },
     {
       path: '/errors',
       name: 'errors',
