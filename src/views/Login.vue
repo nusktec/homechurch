@@ -47,6 +47,7 @@
   import validator from 'validator';
   import util from './../utils';
   import data from './../data';
+  import store from './../store';
 
   export default {
     components: { VueHeadful },
@@ -75,8 +76,9 @@
       let dc = new data.apiCaller(this);
       dc.loginAccount(this.$data, (res) => {
         this.loading = false;
-        console.log(res);
         if (res && res.status) {
+          //pull to store
+          store.commit('userAdd', res.data);
           //login has begin
           util.Util.alertBox(this, '', res.msg, 'success', 3000);
           data.auth.setLogin(JSON.stringify(res.data));

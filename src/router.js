@@ -128,6 +128,15 @@ export default new Router({
       component: Errors,
     },
     {
+      path: '/logout',
+      name: 'logout',
+      component: Errors,
+      beforeEnter: (req, res, next) => {
+        data.auth.logOut();
+        next({name: 'login'});
+      }
+    },
+    {
       path: '*',
       redirect: '/errors',
     },

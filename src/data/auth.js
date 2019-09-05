@@ -23,6 +23,16 @@ class Auth {
     return role.u_isAdmin;
   }
 
+  //check auth role
+  static localUserObj() {
+    if (!this.isLogin()) {
+      return {};
+    }
+    let su = localStorage.getItem(USER_KEY);
+    let role = JSON.parse(localStorage.getItem(USER_KEY));
+    return role;
+  }
+
   // set login data
   static setLogin(data) {
     localStorage.setItem(USER_KEY, data);
