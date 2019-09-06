@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 //New Import views
 import Test from './views/rough/ComponentsOverview';
+import Test2 from './views/TestPage';
 import MainLayout from './layouts/Default';
 import PlainLayout from './layouts/PlainLayout';
 import Errors from './views/Errors';
@@ -32,6 +33,12 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: Test,
+      meta: { title: 'test' }
+    },
+    {
+      path: '/test2',
+      name: 'test2',
+      component: Test2,
       meta: { title: 'test' }
     },
     {
