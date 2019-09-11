@@ -1,14 +1,17 @@
 <template>
     <d-container fluid class="px-lg-4 pb-lg-5 py-lg-5">
-        <div class="mx-lg-5">
+        <div class="mx-lg-5 pad">
             <div class="row shadow" style="background-color: white; border-radius: 1px; overflow: hidden;">
-                <div class="col-lg-7 col-md-12 text-center align-items-center" style="background-color: #2c2f44">
-                    <h1 style="font-family: Lobster" class="text-white my-5">Greeting, You !</h1>
-                    <h2 style="font-family: Sofia" class="text-white my-2">Dunamis Online</h2>
-                    <h4 style="font-family: Lexend Deca" class="text-white my-2">Home Cell</h4>
-                    <img class="my-5" width="50%" src="images/connectivity-image.png" alt="Connectivity Image">
+                <div class="col-lg-8 col-md-12"
+                     style="background-image: url('bg.jpg'); background-size: cover; background-repeat: no-repeat;">
+                    <div class="h-100 my-auto row align-items-center">
+                        <div class="col justify-content-center text-center">
+                            <h1 style="font-family: Lobster" class="text-white">Welcome !</h1>
+                            <h3 style="font-family: Lobster" class="text-white">Create new account and connect</h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-5 col-md-12">
+                <div class="col-lg-4 col-md-12">
                     <d-list-group>
                         <div class="px-lg-2 mx-2 my-2 text-center">
                             <i class="my-4 fa fa-arrow-down"></i>
@@ -30,8 +33,8 @@
                                 <d-input-group prepend="<i class='fa fa-venus-mars'/>" class="mb-3">
                                     <d-select :disabled="disabled" v-model="sex">
                                         <option>-Select Sex-</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
                                     </d-select>
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-globe'/>" class="mb-3">
@@ -131,7 +134,7 @@
     this.disabled = true;
     Util.Util.alertBox(this, '', 'Please wait, processing registration...', 'info', 3000);
     let controller = new data.apiCaller(this);
-    controller.createAccount(this.$data, (data) => {
+    controller.userCreate(this.$data, (data) => {
       if (data) {
         //success
         if (data.status) {

@@ -2,7 +2,7 @@
     <d-container fluid class="main-content-container px-4 pb-4">
         <!-- Error -->
         <div class="error">
-            <div class="error__content">
+            <div class="error__content p-4" style="background-color: white">
                 <h5>Successful !</h5>
                 <h3>{{title}}</h3>
                 <p>{{msg}}</p>

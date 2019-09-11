@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-center my-lg-5">
             <div class="row shadow" style="background-color: white; border-radius: 1px; overflow: hidden; width: 700px">
                 <div class="col-lg-6 col-md-12 text-center align-items-center" style="background-color: #2c2f44; overflow: hidden">
-                    <h1 style="font-family: Lobster" class="text-white my-5">Reset My Account</h1>
+                    <h2 style="font-family: Lobster" class="text-white my-5">Reset My Account</h2>
                     <h3 style="font-family: Sofia" class="text-white my-2">Existing User</h3>
                     <img style="height: 100px;" class="my-3" src="images/connectivity-image.png" alt="Connectivity Image">
                 </div>

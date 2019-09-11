@@ -16,17 +16,18 @@ class apiCaller {
   constructor(ctx) {
     context = ctx;
     //start auto loading
-    if(auth.isLogin()){
+    if (auth.isLogin()) {
       this.mainLoader();
     }
   }
 
-  mainLoader(){
-    this.getAccountNoCallBack();
+  //auto load
+  mainLoader() {
+    this.userGetNoCallBack();
   }
 
-  //sign up functions
-  createAccount(data, callback) {
+  //user create an account
+  userCreate(data, callback) {
     context.axios.post(dc.userCreate, data)
       .then(res => {
         callback(res.data);
@@ -37,8 +38,8 @@ class apiCaller {
       });
   }
 
-  //functions for login
-  loginAccount(data, callback) {
+  //user login into account
+  userAccount(data, callback) {
     context.axios.post(dc.userLogin, data)
       .then(res => {
         callback(res.data);
@@ -49,8 +50,8 @@ class apiCaller {
       });
   }
 
-  //pull logged account
-  getAccount(callback) {
+  //user get account from local
+  userGet(callback) {
     let storeData = store.state.user;
     if (storeData) {
       callback(storeData);
@@ -77,9 +78,16 @@ class apiCaller {
       }
     }
   }
-  //get account no call back
-  getAccountNoCallBack(){
-  this.getAccount(res=>{});
+
+  //user get account no call back
+  userGetNoCallBack() {
+    this.userGet(res => {
+    });
+  }
+
+  //user update account
+  userUpdate($data, callback) {
+
   }
 }
 
