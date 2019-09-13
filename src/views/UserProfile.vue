@@ -6,7 +6,7 @@
                 <span class="text-uppercase page-subtitle">Profile</span>
             </d-col>
         </d-row>
-        <h1>{{userData.u_email}}</h1>
+        <h1>{{user.u_email}}</h1>
         <!-- Content -->
         <d-row>
             <d-col lg="4">
@@ -31,9 +31,7 @@
       uplUserDetails: UserDetails,
       uplUserAccountDetails: UserAccountDetails,
     },
-    computed: mapState({
-      userData: state => state.user
-    }),
+    computed: mapState(['user', 'title']),
     beforeMount() {
       //auto caller
       new apiCaller(this);

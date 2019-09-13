@@ -26,6 +26,7 @@
 <script>
   import MetaData from './../components/extra/MetaData';
   import getSidebarItems from '@/data/sidebar-nav-items';
+  import { mapState } from 'vuex';
 
   // Main layout components
   import MainNavbar from '@/components/layout/MainNavbar/MainNavbar.vue';
@@ -43,7 +44,6 @@
     data() {
       return {
         sidebarItems: getSidebarItems(),
-        title: this.$router.currentRoute.meta.title ? this.$router.currentRoute.meta.title : 'Home'
       };
     },
     mounted() {
@@ -51,7 +51,10 @@
       setTimeout(() => {
         this.$refs.topProgress.done();
       }, 1000);
-    }
+    },
+    computed: mapState({
+      title: state => state.title,
+    })
   };
 </script>
 

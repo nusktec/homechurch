@@ -74,6 +74,7 @@
   import VueHeadful from 'vue-headful';
   import validator from 'validator';
   import data from './../data';
+  import { mapState } from 'vuex';
 
   export default {
     components: { VueHeadful },
@@ -93,7 +94,8 @@
     },
     methods: {
       onSubmit: filterSubmit
-    }
+    },
+    computed: mapState(['title'])
   };
 
   //filter and submit

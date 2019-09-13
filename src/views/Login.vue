@@ -60,7 +60,7 @@
     },
     methods: {
       onSubmit: loginRequest
-    }
+    },
   };
 
   //on login Request

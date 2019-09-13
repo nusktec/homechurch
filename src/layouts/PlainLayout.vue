@@ -8,15 +8,15 @@
 </template>
 <script>
   import MetaData from './../components/extra/MetaData';
+  import store from './../store';
+  import { mapState } from 'vuex';
 
   export default {
     components: {
       MetaData,
     },
-    data() {
-      return {
-        title: this.$router.currentRoute.meta.title
-      };
-    }
+    computed: mapState({
+      title: state => state.title,
+    }),
   };
 </script>

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from './store';
 //New Import views
 import Test from './views/rough/ComponentsOverview';
 import Test2 from './views/TestPage';
@@ -17,7 +18,7 @@ import data from './data';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   linkActiveClass: 'active',
@@ -140,7 +141,7 @@ export default new Router({
       component: Errors,
       beforeEnter: (req, res, next) => {
         data.auth.logOut();
-        next({name: 'login'});
+        next({ name: 'login' });
       }
     },
     {
@@ -149,3 +150,9 @@ export default new Router({
     },
   ],
 });
+//perform group title changer
+router.beforeEach((req, res, next)=>{
+  store.commit('changeTitle', req.meta.title);
+  next();
+});
+export default router;

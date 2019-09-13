@@ -37,6 +37,7 @@
   import VueHeadful from 'vue-headful';
   import validator from 'validator';
   import util from './../utils';
+  import { mapState } from 'vuex';
 
   export default {
     components: { VueHeadful },
@@ -49,7 +50,8 @@
     },
     methods: {
       onSubmit: loginRequest
-    }
+    },
+    computed: mapState(['title']),
   };
 
   //on login Request
