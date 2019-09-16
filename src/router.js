@@ -126,32 +126,40 @@ const router = new Router({
     },
     //Error and success handling
     {
-      path: '/success',
-      name: 'success',
-      component: SuccessView,
-    },
-    {
-      path: '/errors',
-      name: 'errors',
-      component: Errors,
-    },
-    {
-      path: '/logout',
-      name: 'logout',
-      component: Errors,
-      beforeEnter: (req, res, next) => {
-        data.auth.logOut();
-        next({ name: 'login' });
-      }
-    },
-    {
-      path: '*',
-      redirect: '/errors',
-    },
+      component: PlainLayout,
+      path: '/',
+      children: [
+        {
+          path: '/success',
+          name: 'success',
+          component: SuccessView,
+          meta: { title: 'Success' }
+        },
+        {
+          path: '/errors',
+          name: 'errors',
+          component: Errors,
+          meta: { title: 'Error' }
+        },
+        {
+          path: '/logout',
+          name: 'logout',
+          component: Errors,
+          beforeEnter: (req, res, next) => {
+            data.auth.logOut();
+            next({ name: 'login' });
+          }
+        },
+        {
+          path: '*',
+          redirect: '/errors',
+        },
+      ]
+    }
   ],
 });
 //perform group title changer
-router.beforeEach((req, res, next)=>{
+router.beforeEach((req, res, next) => {
   store.commit('changeTitle', req.meta.title);
   next();
 });

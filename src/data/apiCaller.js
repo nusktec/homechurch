@@ -70,6 +70,8 @@ class apiCaller {
               callback(uid);
             } else {
               callback(false);
+              //logout
+              auth.logOut();
             }
           });
       } catch (e) {
@@ -86,8 +88,19 @@ class apiCaller {
   }
 
   //user update account
-  userUpdate($data, callback) {
-
+  userUpdate(data, callback) {
+    context.axios.post(dc.userUpdate, data)
+      .then((res) => {
+        if (res.data.status) {
+          callback(res.data.data);
+          return;
+        }
+        callback(false);
+      })
+      .catch((err) => {
+        callback(false);
+        logs(err);
+      });
   }
 }
 

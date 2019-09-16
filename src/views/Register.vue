@@ -32,7 +32,7 @@
                                 </d-input-group>
                                 <d-input-group prepend="<i class='fa fa-venus-mars'/>" class="mb-3">
                                     <d-select :disabled="disabled" v-model="sex">
-                                        <option>-Select Sex-</option>
+                                        <option>-Select Gender-</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
                                     </d-select>
@@ -130,6 +130,13 @@
     //check for password equality
     if (!validator.equals(this.pass1, this.pass2)) {
       Util.Util.alertBox(this, '', 'Password not the same.', 'warn', 3000);
+      return;
+    }
+    if (!validator.isLength(this.pass1, {
+      min: 5,
+      max: 20
+    })) {
+      Util.Util.alertBox(this, '', 'Password strength is weak.', 'warn', 3000);
       return;
     }
     //set data progress to disabled
