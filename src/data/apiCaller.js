@@ -7,7 +7,7 @@
 import dc from './apiConstant';
 import store from './../store';
 import auth from './auth';
-import mutatinos from './../mutations';
+import mutations from './../mutations';
 
 const logger = true;
 let context = null;
@@ -66,7 +66,7 @@ class apiCaller {
           .then(res => {
             if (res.data.status) {
               let uid = res.data.data;
-              store.commit(mutatinos.userAdd, uid);
+              store.commit(mutations.userAdd, uid);
               callback(uid);
             } else {
               callback(false);

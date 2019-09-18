@@ -18,7 +18,7 @@
 
   let account_data = {
     name: 'Account Name',
-    email: 'name@churcha2x.com',
+    email: 'nusktecsoft@gmail.com',
     phone: '08123456788',
     password: '12345',
     country: 'Account Location/Country',
@@ -31,9 +31,9 @@
   //testing data
   function testAxios() {
     let ssk = '801fe414298dc26cbd0f7f52cca001fc928142bd';
-    let login = {email: 'name@churcha2x.com', password: '12345'};
-    let data = login; //{token: "9dcc3fbc9cc8e71dfcbfd308e741ce8c9760a6c4"}; //church_data; //{email: 'church@church.com', password: '12345'};
-    this.axios.post('http://api.churcha2z.org/user/login/?ssk=' + ssk, login)
+    let login = {email: 'nusktecsoft@gmail.com', password: '12345'};
+    let data = {token: "22b8a9e9930537edeaff9e6aaee43d3d7314c071", pass1: '123456', pass2: '12345'}; //church_data; //{email: 'church@church.com', password: '12345'};
+    this.axios.post('http://api.churcha2z.org/user/request-psw-reset/?ssk=' + ssk, {email: 'nusktecsoft@gmail.com'})
       .then((res) => {
         console.log(res.data);
       })

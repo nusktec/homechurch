@@ -26,8 +26,8 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-nowrap px-3" v-d-toggle.user-actions>
                 <img class="user-avatar rounded-circle mr-2"
-                     :src="require('@/assets/images/avatars/'+user.u_avatar+'.jpg')" alt="User Avatar">
-                <span class="d-none d-md-inline-block">{{!user.u_gender==='M' ? 'Hi, Mr.':'Hi, '}}{{user.u_name.split(' ')[0]}}</span>
+                     :src="u_img" alt="User Avatar" v-if="u_img">
+                <span v-if="user" class="d-none d-md-inline-block">{{!user.u_gender==='M' ? 'Hi, Mr.':'Hi, '}}{{user.u_name.split(' ')[0]}}</span>
             </a>
             <d-collapse id="user-actions" class="dropdown-menu dropdown-menu-small">
                 <d-dropdown-item><i class="material-icons">&#xE7FD;</i> Profile</d-dropdown-item>
@@ -52,6 +52,14 @@
   import { mapState } from 'vuex';
 
   export default {
-    computed: mapState(['user'])
+    data() {
+      return { u_img: require('@/assets/images/avatars/0.png') };
+    },
+    computed: mapState(['user']),
+    watch: {
+      user: function (val) {
+        this.u_img = require('@/assets/images/avatars/' + val.u_avatar + '.jpg');
+      }
+    },
   };
 </script>

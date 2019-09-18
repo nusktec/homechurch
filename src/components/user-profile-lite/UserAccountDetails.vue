@@ -26,15 +26,17 @@
                                 <!-- Email -->
                                 <d-col md="6" class="form-group">
                                     <label for="feEmail">Email</label>
-                                    <d-form-input disabled="true" :value="userDetails.u_email" type="email" id="feEmail"
+                                    <d-form-input :disabled="true" :value="userDetails.u_email" type="email"
+                                                  id="feEmail"
                                                   placeholder="Email Address"/>
                                 </d-col>
 
                                 <!-- Password -->
                                 <d-col md="6" class="form-group">
                                     <label for="input">User ID</label>
-                                    <d-form-input disabled="true" type="text" id="input" placeholder="User ID"
-                                                  :value="'000'+userDetails.u_id+userDetails.u_name.substr(0,2).toUpperCase()"/>
+                                    <d-form-input :disabled="true" type="text"
+                                                  id="input" placeholder="User ID"
+                                                  :value="'000'+userDetails.u_id"/>
                                 </d-col>
 
                             </d-form-row>
@@ -74,7 +76,7 @@
                                 <!-- Zip Code -->
                                 <d-col md="2" class="form-group">
                                     <label for="inputZip">Gender</label>
-                                    <d-select :disabled="disabled" v-model="userDetails.u_gender">
+                                    <d-select v-model="userDetails.u_gender">
                                         <option>-Select Gender-</option>
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
@@ -119,11 +121,6 @@
         default: 'Account Details',
       },
     },
-    data() {
-      return {
-        userDetails: userDetails
-      };
-    },
     methods: {
       submitUpdate: updateApi,
     }
@@ -135,10 +132,11 @@
     let d = this.userDetails;
     api.userUpdate(d, (res) => {
       if (res) {
-        util.Util.alertBox(this, '', "Account updated successfully",'success', 3000);
+        util.Util.alertBox(this, '', 'Account updated successfully', 'success', 3000);
         return;
       }
       //error showcasing
+      util.Util.alertBox(this, '', 'Account updated unsuccessful', 'warn', 3000);
     });
   }
 </script>
