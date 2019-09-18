@@ -18,6 +18,7 @@ import '@/assets/scss/date-range.scss';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import Api from './data/ApiInstaller';
 
 ShardsVue.install(Vue);
 Vue.use(VueAxios, axios); //use axios library here
@@ -25,6 +26,7 @@ Vue.use(vueHeadful, { component: true }); // use vue-head-full for meta
 Vue.use(vueTopProgress); //use top progressbar
 Vue.use(Notifications); //use notifications
 Vue.use(vueCountryRegionSelect); //use region selection
+Vue.use(Api, { ctx: this });
 
 //Begin configurations
 Vue.config.productionTip = false;
@@ -33,5 +35,5 @@ Vue.prototype.$eventHub = new Vue();
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app');

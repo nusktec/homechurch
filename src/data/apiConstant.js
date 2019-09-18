@@ -12,5 +12,6 @@ let Apis = {
   userLogin: API_URL + '/user/login/?ssk=' + SSK, //login account
   userGetter: API_URL + '/user/get/?ssk=' + SSK, //get user account with token
   userUpdate: API_URL + '/user/update-acc/?ssk=' + SSK, //update user account with token
+  userUpdatePass: API_URL + '/user/update-psw/?ssk=' + SSK, //update user account with token
 };
 export default Apis;

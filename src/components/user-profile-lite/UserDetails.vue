@@ -46,7 +46,7 @@
                             <d-input-group-text slot="prepend">
                                 <i class="fa fa-lock"></i>
                             </d-input-group-text>
-                            <d-input v-model="pass.passOld" placeholder="Old Password"/>
+                            <d-input type="password" v-model="pass.passOld" placeholder="Old Password"/>
                         </d-input-group>
 
                         <div class="row">
@@ -55,7 +55,9 @@
                                     <d-input-group-text slot="prepend">
                                         <i class="fa fa-key"></i>
                                     </d-input-group-text>
-                                    <d-input type="password" v-model="pass.passNew1" placeholder="New Password"/>
+                                    <d-input @change="comparePass" :state="invalid" type="password"
+                                             v-model="pass.passNew1"
+                                             placeholder="New Password"/>
                                 </d-input-group>
                             </div>
                             <div class="col-6">
@@ -63,11 +65,15 @@
                                     <d-input-group-text slot="prepend">
                                         <i class="fa fa-key"></i>
                                     </d-input-group-text>
-                                    <d-input type="password" v-model="pass.passNew2" placeholder="Repeat Password"/>
+                                    <d-input @change="comparePass" :state="invalid" type="password"
+                                             v-model="pass.passNew2"
+                                             placeholder="Repeat Password"/>
                                 </d-input-group>
                             </div>
                         </div>
-                        <d-button @click="changePass" theme="danger" class="mb-0 w-100">Change Password</d-button>
+                        <d-button :disabled="btnLoad" @click="changePass" theme="danger" class="mb-0 w-100">Change
+                            Password
+                        </d-button>
                     </div>
                 </d-list-group-item>
             </d-list-group>
@@ -77,8 +83,9 @@
 </template>
 
 <script>
-    //imports
-    import val from 'validator';
+  //imports
+  import validator from 'validator';
+  import Util from './../../utils/';
 
   const defaultUserDetails = {
     u_name: 'Please wait...',
@@ -108,22 +115,74 @@
           passNew1: '',
           passNew2: '',
         },
-        u_img: require('@/assets/images/avatars/0.png')
+        u_img: require('@/assets/images/avatars/0.png'),
+        btnLoad: false,
+        invalid: null
       };
     },
     watch: {
       userDetails: function (val) {
         this.u_img = require('@/assets/images/avatars/' + val.u_avatar + '.jpg');
         this.userDetails = val === false ? {} : val;
-      }
+      },
     },
     methods: {
       changePass: changePassword,
+      comparePass: comparePassword,
     }
   };
 
+  //compare and mark password
+  function comparePassword() {
+    //make password correct
+    if (this.pass.passNew1 === this.pass.passNew2) {
+      this.invalid = 'valid';
+    } else {
+      this.invalid = 'invalid';
+    }
+  }
+
   //change password
   function changePassword() {
-    alert(this.pass.passNew1);
+    let api = new this.$Api(this);
+    let oldP = validator.isLength(this.pass.passOld, {
+      min: 5,
+      max: 15
+    });
+    let oldN1 = validator.isLength(this.pass.passNew1, {
+      min: 5,
+      max: 15
+    });
+    let oldN2 = validator.isLength(this.pass.passNew2, {
+      min: 5,
+      max: 15
+    });
+    if (!oldP || !oldN1 || !oldN2) {
+      //change password
+      Util.Util.alertBox(this, '', 'Password pattern too small', 'warn', 3000);
+      return;
+    }
+    if (this.pass.passNew1 !== this.pass.passNew2) {
+      //change password
+      Util.Util.alertBox(this, '', 'Password doesn\'t look same', 'warn', 3000);
+      return;
+    }
+    //proceed updating account
+    this.btnLoad = true;
+    let data = {
+      passwordOld: this.pass.passOld,
+      passwordNew: this.pass.passNew1,
+      token: this.userDetails.u_token
+    };
+    api.userUpdatePass(data, (callback) => {
+      if (callback.status) {
+        Util.Util.alertBox(this, '', 'Password successfully changed', 'success', 3000);
+        this.pass = {};
+        this.invalid = null;
+      } else {
+        Util.Util.alertBox(this, '', callback.msg, 'warn', 3000);
+      }
+      this.btnLoad = false;
+    });
   }
 </script>

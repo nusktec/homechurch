@@ -102,6 +102,19 @@ class apiCaller {
         logs(err);
       });
   }
+
+  //change password
+  userUpdatePass(data, callback) {
+    context.axios.post(dc.userUpdatePass, data)
+      .then(res => {
+        let d = res.data;
+        if (d) {
+          callback(d);
+        } else {
+          callback(false);
+        }
+      });
+  }
 }
 
 //logger expo
