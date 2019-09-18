@@ -4,6 +4,7 @@ import store from './store';
 //New Import views
 import Test from './views/rough/ComponentsOverview';
 import Test2 from './views/TestPage';
+//Misc layout
 import MainLayout from './layouts/Default';
 import PlainLayout from './layouts/PlainLayout';
 import Errors from './views/Errors';
@@ -11,6 +12,9 @@ import SuccessView from './views/Success';
 import LoginView from './views/Login';
 import RegisterView from './views/Register';
 import ResetView from './views/Reset';
+//Main views
+import UserHomeView from './views/HomePage';
+import UserTestimonyView from './views/Testimony';
 import UserProfileView from './views/UserProfile';
 
 //ThirdParty library
@@ -48,7 +52,7 @@ const router = new Router({
       redirect: '/login',
       beforeEnter: (req, res, next) => {
         if (data.auth.isLogin() && !data.auth.isAdminRole()) {
-          next({ name: 'profile' });
+          next({ name: 'home' });
         } else if (data.auth.isLogin() && data.auth.isAdminRole()) {
           next({ name: 'dashboard' });
         } else {
@@ -80,7 +84,7 @@ const router = new Router({
     {
       path: '/',
       component: MainLayout,
-      redirect: '/profile',
+      redirect: '/home',
       beforeEnter: (req, res, next) => {
         if (data.auth.isLogin() && !data.auth.isAdminRole()) {
           next();
@@ -89,6 +93,24 @@ const router = new Router({
         }
       },
       children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: UserHomeView,
+          meta: {
+            title: 'Home',
+            isAdmin: false,
+          }
+        },
+        {
+          path: '/testimony',
+          name: 'testimony',
+          component: UserTestimonyView,
+          meta: {
+            title: 'Testimony',
+            isAdmin: false,
+          }
+        },
         {
           path: '/profile',
           name: 'profile',

@@ -18,5 +18,9 @@
     computed: mapState({
       title: state => state.title,
     }),
+    mounted() {
+      //initialize api caller
+      new this.$Api(this);
+    }
   };
 </script>

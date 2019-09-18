@@ -83,7 +83,7 @@
           util.Util.alertBox(this, '', res.msg, 'success', 3000);
           data.auth.setLogin(JSON.stringify(res.data));
           //Profile leading
-          this.$router.push({ name: 'profile' });
+          this.$router.push({ name: 'home' });
         } else {
           util.Util.alertBox(this, '', res.msg, 'warn', 5000);
         }

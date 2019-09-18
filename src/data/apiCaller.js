@@ -24,6 +24,7 @@ class apiCaller {
   //auto load
   mainLoader() {
     this.userGetNoCallBack();
+    this.userNotifications();
   }
 
   //user create an account
@@ -113,6 +114,27 @@ class apiCaller {
         } else {
           callback(false);
         }
+      });
+  }
+
+  //load notifications
+  userNotifications(callback = () => null) {
+    if (store.state.notifications.length > 0) {
+      callback(store.state.notifications);
+      return;
+    }
+    //load from api and store it
+    let ui = auth.localUserObj();
+    context.axios.post(dc.userNotifications, { token: ui.u_token })
+      .then(res => {
+        if (res.data.status) {
+          store.commit(mutations.updateNotifications, res.data.data);
+          callback(res.data.data);
+          console.log(res.data);
+        }
+      })
+      .catch(err => {
+        callback(false);
       });
   }
 }

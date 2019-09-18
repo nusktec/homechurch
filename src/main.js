@@ -19,6 +19,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import Api from './data/ApiInstaller';
+import ApiCons from './data/ApiConstInstaller';
 
 ShardsVue.install(Vue);
 Vue.use(VueAxios, axios); //use axios library here
@@ -26,12 +27,11 @@ Vue.use(vueHeadful, { component: true }); // use vue-head-full for meta
 Vue.use(vueTopProgress); //use top progressbar
 Vue.use(Notifications); //use notifications
 Vue.use(vueCountryRegionSelect); //use region selection
-Vue.use(Api, { ctx: this });
-
+Vue.use(Api, { ctx: this }); //use api global
+Vue.use(ApiCons); //use constant
 //Begin configurations
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
-
 new Vue({
   router,
   store,

@@ -1,6 +1,6 @@
 <template>
     <d-container fluid class="px-lg-4 pb-lg-5 py-lg-5">
-        <div class="mx-lg-5 pad">
+        <div class="mx-lg-5">
             <div class="row shadow" style="background-color: white; border-radius: 1px; overflow: hidden;">
                 <div class="col-lg-8 col-md-12"
                      style="background-image: url('bg.jpg'); background-size: cover; background-repeat: no-repeat;">

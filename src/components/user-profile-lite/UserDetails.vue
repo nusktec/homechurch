@@ -7,7 +7,7 @@
 
                 <!-- User Avatar -->
                 <div class="mb-3 mx-auto">
-                    <img class="rounded-circle" :src="u_img"
+                    <img class="rounded-circle pimg" :src="u_img"
                          :alt="userDetails.role"
                          width="110">
                 </div>
@@ -17,14 +17,17 @@
                 <span class="text-muted d-block mb-2 badge">{{ userDetails.u_role===0?'Member':'HC.Leader' }}</span>
 
                 <!-- User Follow -->
-                <d-button pill outline size="sm" class="mb-2"><i class="material-icons mr-1">note</i> Give Testimony
+                <router-link to="/testimony">
+                    <d-button pill outline theme="secondary" size="sm" class="mb-2"><i
+                            class="material-icons mr-1">note</i> Give Testimony
+                    </d-button>
+                </router-link>
+                <d-button v-on:click="uploadDp" pill outline theme="secondary" size="sm" class="mb-2 ml-2"><i
+                        class="material-icons">image</i>DP
                 </d-button>
-
             </d-card-header>
 
             <d-list-group flush>
-
-
                 <!-- User Meta -->
                 <d-list-group-item>
                     <strong class="text-muted d-block mb-2">About you</strong>
@@ -117,7 +120,8 @@
         },
         u_img: require('@/assets/images/avatars/0.png'),
         btnLoad: false,
-        invalid: null
+        invalid: null,
+        imgPath: this.$ApiCons.appFile.userAvatar,
       };
     },
     watch: {
@@ -129,6 +133,12 @@
     methods: {
       changePass: changePassword,
       comparePass: comparePassword,
+      uploadDp: updateAvatar,
+      onFile(file){
+        //load file here
+        console.log(file);
+        this.u_img = file.name;
+      }
     }
   };
 
@@ -140,6 +150,12 @@
     } else {
       this.invalid = 'invalid';
     }
+  }
+
+  //change dp
+  function updateAvatar() {
+    //start imaging
+
   }
 
   //change password

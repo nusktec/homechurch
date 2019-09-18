@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: false,
+    notifications: [],
     title: 'Home'
   },
   mutations: {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     changeTitle(state, data) {
       state.title = data;
+    },
+    updateNotifications(state, data) {
+      state.notifications = data;
     }
   },
   actions: {},
