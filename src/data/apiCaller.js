@@ -130,7 +130,21 @@ class apiCaller {
         if (res.data.status) {
           store.commit(mutations.updateNotifications, res.data.data);
           callback(res.data.data);
-          console.log(res.data);
+        }
+      })
+      .catch(err => {
+        callback(false);
+      });
+  }
+
+  //clear notifications
+  userClearNotifications(callback = () => null) {
+    //load from api and store it
+    let ui = auth.localUserObj();
+    context.axios.post(dc.userClearNotifications, { token: ui.u_token })
+      .then(res => {
+        if (res.data.status) {
+          window.location.reload();
         }
       })
       .catch(err => {

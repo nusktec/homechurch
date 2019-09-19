@@ -32,7 +32,7 @@
             </a>
             <d-collapse id="user-actions" class="dropdown-menu dropdown-menu-small">
                 <d-dropdown-item href="/profile"><i class="material-icons">&#xE7FD;</i> Profile</d-dropdown-item>
-                <d-dropdown-item><i class="material-icons">&#xE8B8;</i> Testimonies</d-dropdown-item>
+                <d-dropdown-item href="/testimony"><i class="material-icons">&#xE8B8;</i> Testimonies</d-dropdown-item>
                 <d-dropdown-item><i class="material-icons">&#xE2C7;</i> Community</d-dropdown-item>
                 <d-dropdown-item><i class="material-icons">&#xE896;</i> Online Giving</d-dropdown-item>
                 <d-dropdown-divider/>
@@ -66,7 +66,8 @@
     },
     methods: {
       clearNotifications() {
-        console.log('Hello !');
+        let api = new this.$Api(this);
+        api.userClearNotifications();
       }
     }
   };

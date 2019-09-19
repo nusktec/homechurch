@@ -8,6 +8,7 @@ import vueHeadful from 'vue-headful';
 import vueTopProgress from 'vue-top-progress';
 import Notifications from 'vue-notification';
 import vueCountryRegionSelect from 'vue-country-region-select';
+import VModal from 'vue-js-modal';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.css';
@@ -29,6 +30,7 @@ Vue.use(Notifications); //use notifications
 Vue.use(vueCountryRegionSelect); //use region selection
 Vue.use(Api, { ctx: this }); //use api global
 Vue.use(ApiCons); //use constant
+Vue.use(VModal); //use for modal calls
 //Begin configurations
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();

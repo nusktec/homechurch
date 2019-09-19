@@ -7,9 +7,14 @@
             </d-col>
         </d-row>
         <!-- Content -->
-        <d-row>
+        <div class="row">
+            <div class="col-lg-6">
 
-        </d-row>
+            </div>
+            <div class="col-lg-6 bg-danger">
+                <h1>1</h1>
+            </div>
+        </div>
     </d-container>
 </template>
 
@@ -18,6 +23,7 @@
   import UserAccountDetails from '@/components/user-profile-lite/UserAccountDetails.vue';
   import apiCaller from './../data/apiCaller';
   import { mapState } from 'vuex';
+
   export default {
     name: 'user-profile-lite',
     components: {
