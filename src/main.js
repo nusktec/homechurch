@@ -30,7 +30,7 @@ Vue.use(Notifications); //use notifications
 Vue.use(vueCountryRegionSelect); //use region selection
 Vue.use(Api, { ctx: this }); //use api global
 Vue.use(ApiCons); //use constant
-Vue.use(VModal); //use for modal calls
+Vue.use(VModal, {dynamic: true, injectModalsContainer: true}); //use for modal calls
 //Begin configurations
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();

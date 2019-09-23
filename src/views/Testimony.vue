@@ -14,20 +14,21 @@
         </div>
         <div class="row py-2">
             <div class="col-lg-6 bg-danger">
-
-            </div>
-            <div class="col-lg-6 bg-danger">
                 <h1>1</h1>
             </div>
+            <div class="col-lg-6 bg-danger">
+                <h1>2</h1>
+            </div>
         </div>
-
-        <modal name="hello-world">
-            <d-form class="p-3">
+        <modal :adaptive="true" :clickToClose="false" height="auto" name="add-testimony">
+            <d-form class="p-3" onsubmit="return false">
                 <d-form-row>
                     <d-col class="form-group" md="12">
                         <label for="feInputAddress">Name</label>
-                        <d-form-input type="text" id="feInputAddress"
+                        <d-form-input :value="user.u_name" type="text" id="feInputAddress"
                                       placeholder="Testifier's Name"/>
+                        <d-form-input :value="new Date().toUTCString()" type="text" id="feInputDate"
+                                      placeholder="Choose Date"/>
                     </d-col>
                     <!-- Description -->
                     <d-col md="12" class="form-group">
@@ -36,27 +37,23 @@
                                   rows="5"></textarea>
                     </d-col>
                 </d-form-row>
-
-                <d-button pill type="submit" class="btn-accent">Submit Now
-                </d-button>
-
+                <d-form-row>
+                    <div class="d-flex justify-content-between w-100">
+                        <d-button size="sm" outline theme="danger" class="mb-2 ml-1">Cancel <i class="fa fa-times"></i>
+                        </d-button>
+                        <d-button size="sm" theme="secondary" class="mb-2 mr-1">Submit Now <i
+                                class="fa fa-paper-plane"></i></d-button>
+                    </div>
+                </d-form-row>
             </d-form>
         </modal>
     </d-container>
 </template>
 
 <script>
-  import UserDetails from '@/components/user-profile-lite/UserDetails.vue';
-  import UserAccountDetails from '@/components/user-profile-lite/UserAccountDetails.vue';
   import apiCaller from './../data/apiCaller';
   import { mapState } from 'vuex';
-
   export default {
-    name: 'user-profile-lite',
-    components: {
-      uplUserDetails: UserDetails,
-      uplUserAccountDetails: UserAccountDetails,
-    },
     computed: mapState(['user', 'title']),
     beforeMount() {
       //auto caller
@@ -64,10 +61,10 @@
     },
     methods: {
       show() {
-        this.$modal.show('hello-world');
+        this.$modal.show('add-testimony', this.user);
       },
       hide() {
-        this.$modal.hide('hello-world');
+        this.$modal.hide('add-testimony');
       }
     }
   };
