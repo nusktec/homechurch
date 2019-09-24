@@ -5,7 +5,7 @@
  Phone: 2348164242320
  **/
 const SSK = 'c783aa9384f9c329678c005a28c55c95bfb62df4';
-const API_URL = 'http://192.168.8.103:3000';
+const API_URL = 'http://localhost:3000';
 // export default
 let Apis = {
   appFile: {
@@ -18,5 +18,7 @@ let Apis = {
   userUpdatePass: API_URL + '/user/update-psw/?ssk=' + SSK, //update user account with token
   userNotifications: API_URL + '/user/get-notifications/?ssk=' + SSK, //update user account with token
   userClearNotifications: API_URL + '/user/clear-notifications/?ssk=' + SSK, //update user account with token
+  userAddTestimony: API_URL + '/user/add-testimony/?ssk=' + SSK, //user add testimony
+  userGetTestimony: API_URL + '/user/get-testimonies/?ssk=' + SSK, //user add testimony
 };
 export default Apis;

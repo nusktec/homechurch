@@ -27,6 +27,13 @@ class apiCaller {
     this.userNotifications();
   }
 
+  //get fired
+  static actionShooter(firer) {
+    if (store.state.user) {
+      firer(store.state.user);
+    }
+  }
+
   //user create an account
   userCreate(data, callback) {
     context.axios.post(dc.userCreate, data)
@@ -125,7 +132,7 @@ class apiCaller {
     }
     //load from api and store it
     let ui = auth.localUserObj();
-    context.axios.post(dc.userNotifications, { token: ui.u_token })
+    context.axios.post(dc.userNotifications, { email: ui.u_email })
       .then(res => {
         if (res.data.status) {
           store.commit(mutations.updateNotifications, res.data.data);
@@ -141,7 +148,7 @@ class apiCaller {
   userClearNotifications(callback = () => null) {
     //load from api and store it
     let ui = auth.localUserObj();
-    context.axios.post(dc.userClearNotifications, { token: ui.u_token })
+    context.axios.post(dc.userClearNotifications, { email: ui.u_email })
       .then(res => {
         if (res.data.status) {
           window.location.reload();
@@ -150,6 +157,42 @@ class apiCaller {
       .catch(err => {
         callback(false);
       });
+  }
+
+  //Add testimony testimony
+  userAddTestimonies(data, cbk) {
+    //load from api and store it
+    context.axios.post(dc.userAddTestimony, data)
+      .then(res => {
+        if (res.data.status) {
+          //yes it's tru
+          cbk(res.data.data);
+        } else {
+          cbk(false);
+        }
+      })
+      .catch(err => {
+        cbk(false);
+      });
+  }
+
+  //pull testimonies
+  userGetTestimonies(puller) {
+    if (store.state.user) {
+      //load from api and store it
+      let ui = auth.localUserObj();
+      context.axios.post(dc.userGetTestimony, { token: ui.u_token })
+        .then(res => {
+          if (res.data.status) {
+            puller(res.data.data);
+          }
+        })
+        .catch(err => {
+          puller(false);
+        });
+    } else {
+      puller(false);
+    }
   }
 }
 

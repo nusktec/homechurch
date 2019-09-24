@@ -188,7 +188,7 @@
     let data = {
       passwordOld: this.pass.passOld,
       passwordNew: this.pass.passNew1,
-      token: this.userDetails.u_token
+      email: this.userDetails.u_email
     };
     api.userUpdatePass(data, (callback) => {
       if (callback.status) {
