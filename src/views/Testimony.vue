@@ -11,13 +11,37 @@
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between">
                     <d-button v-on:click="show" pill outline theme="secondary" size="sm">Create New Testimony</d-button>
-                    <d-button v-on:click="pullTestimony" pill class="btn-white mr-1">Reload</d-button>
+                    <d-button v-on:click="pullTestimony" pill theme="secondary" class="btn-white mr-1">Reload</d-button>
                 </div>
             </div>
         </div>
+        <page-loader :hide="loader"/>
         <div class="row py-2 my-2">
-            <div class="col-lg-12">
-
+            <div v-for="(item, key) in testimonies" class="col-lg-4 col-sm-12 col-md-4 mb-4">
+                <div class="card">
+                    <div :key="key" class="card-header" style="background-image: linear-gradient(to right, #790c24 , #dd1041)">
+                        <h3 class="text-white">#{{key+1}} - Testimony</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>{{item.t_name}}</h4>
+                        <h6 class="card-title text-muted">{{item.t_date}}</h6>
+                        <div class="overflow-scroll" style="max-height: 250px;">
+                            <p class="card-text">{{item.t_desc}}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <d-button disabled theme="secondary" outline class="btn-success mr-1"><i
+                                    :class="item.t_status?'fa fa-eye':'fa fa-eye-slash'"></i>
+                            </d-button>
+                            <div class="d-flex justify-content-end">
+                                <d-button theme="secondary" class="btn-white mr-1">Share <i class="fa fa-share-alt"></i>
+                                </d-button>
+                                <d-button v-on:click="deleteTest(item.t_id)" theme="danger" outline
+                                          class="btn-danger mr-1"><i class="fa fa-times"></i>
+                                </d-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <modal :adaptive="true" :clickToClose="false" height="auto" name="add-testimony">
@@ -51,6 +75,7 @@
                 </d-form-row>
             </d-form>
         </modal>
+        <v-dialog :width="300"/>
     </d-container>
 </template>
 
@@ -62,20 +87,22 @@
 
   export default {
     components: { VueBootstrap4Table },
-    computed: mapState(['user', 'title'],),
+    computed: mapState(['user', 'title', 'testimonies'],),
     mounted() {
       //auto caller
       new apiCaller(this);
       //wait for user available
-      apiCaller.actionShooter((u) => {
-        this.fdata = {
-          tname: u.u_name,
-          tdate: new Date().toUTCString(),
-          tdesc: ''
-        };
-      });
-      //pull testimonies
-      this.pullTestimony();
+      setTimeout(() => {
+        apiCaller.actionShooter((u) => {
+          this.fdata = {
+            tname: u.u_name,
+            tdate: new Date().toUTCString(),
+            tdesc: ''
+          };
+        });
+        //pull testimonies
+        this.pullTestimony();
+      }, 1000);
     },
     data() {
       return {
@@ -85,7 +112,7 @@
           tdesc: ''
         },
         valid: 'invalid',
-        testimonies: []
+        loader: false,
       };
     },
     methods: {
@@ -94,19 +121,66 @@
       },
       hide() {
         this.$modal.hide('add-testimony');
+        this.pullTestimony();
       },
       addTestimony: submitTestimony,
       pullTestimony: getTestimonies,
-    }
+      deleteTest(id) {
+        //delete unctions here
+        this.$modal.show('dialog', {
+          title: 'Are you sure ?',
+          text: 'You want to delete this testimony ?\nDeletion is final !',
+          buttons: [
+            {
+              title: 'Close'
+            },
+            {
+              title: 'Delete',
+              handler: () => {
+                this.$modal.hide('dialog');
+                //fire deletions
+                new apiCaller(this)
+                  .userDelTestimonies(id, resp => {
+                    if (resp.status) {
+                      Util.Util.alertBox(this, '', 'Deleted !', 'success', 3000);
+                      this.pullTestimony(true);
+                    } else {
+                      Util.Util.alertBox(this, '', 'Unable to delete testimony', 'warn', 3000);
+                    }
+                  });
+              }
+            },
+          ]
+        });
+      },
+      coloring() {
+        return 'background-color: red';
+      }
+    },
   };
 
   //pull testimonies
-  function getTestimonies() {
-    new apiCaller(this).userGetTestimonies((data) => {
-      if (data) {
-        this.testimonies = data;
-      }
-    });
+  function getTestimonies(forcePull = false) {
+    if (forcePull) {
+      new apiCaller(this).userGetTestimonies((data) => {
+        if (data) {
+          this.$store.commit('updateTestimonies', data);
+          this.loader = true;
+        }
+      });
+    }
+    if (this.testimonies) {
+      this.loader = true;
+      return;
+    }
+    setTimeout(() => {
+      new apiCaller(this).userGetTestimonies((data) => {
+        if (data) {
+          this.$store.commit('updateTestimonies', data);
+          this.loader = true;
+        }
+      });
+    }, 1000);
   }
 
   //add testimony values
@@ -121,7 +195,6 @@
     }
     //approach network for submits
     new apiCaller(this).userAddTestimonies({
-      token: this.user.u_token,
       tname: this.fdata.tname,
       tdate: this.fdata.tdate,
       tdesc: this.fdata.tdesc
@@ -132,8 +205,9 @@
         this.fdata.tdesc = '';
         this.fdata.tname = this.user.u_name;
         this.hide();
+        this.pullTestimony(true);
       } else {
-        Util.Util.alertBox(this, '', 'Could not add another testimony at the moment', 'warn', 3000);
+        Util.Util.alertBox(this, '', 'Unable to add another testimony, try again', 'warn', 3000);
       }
     });
   }

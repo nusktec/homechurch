@@ -1,8 +1,8 @@
 export default function () {
   return [
     {
-      title: 'Home',
-      htmlBefore: '<i class="fas fa-home"></i>',
+      title: 'Cell Finder',
+      htmlBefore: '<i class="fas fa-search"></i>',
       to: {
         name: 'home',
       },
@@ -13,6 +13,22 @@ export default function () {
       htmlBefore: '<i class="fas fa-pencil-alt"></i>',
       to: {
         name: 'testimony',
+      },
+      meta: { isAdmin: false }
+    },
+    {
+      title: 'Community',
+      htmlBefore: '<i class="fas fa-users"></i>',
+      to: {
+        name: 'community',
+      },
+      meta: { isAdmin: false }
+    },
+    {
+      title: 'Find Locations',
+      htmlBefore: '<i class="fas fa-map-marker"></i>',
+      to: {
+        name: 'find-locations',
       },
       meta: { isAdmin: false }
     },

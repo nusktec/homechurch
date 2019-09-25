@@ -96,6 +96,23 @@ class apiCaller {
   }
 
   //user update account
+  userUpdateDp(data, callback) {
+    //load from api and store it
+    let ui = auth.localUserObj();
+    context.axios.post(dc.userUpdateDp, {
+      token: ui.u_token,
+      data: data
+    })
+      .then((res) => {
+        callback(res.data);
+      })
+      .catch((err) => {
+        callback(false);
+        logs(err);
+      });
+  }
+
+  //user update account
   userUpdate(data, callback) {
     context.axios.post(dc.userUpdate, data)
       .then((res) => {
@@ -161,6 +178,8 @@ class apiCaller {
 
   //Add testimony testimony
   userAddTestimonies(data, cbk) {
+    let ui = auth.localUserObj();
+    data.token = ui.u_token;
     //load from api and store it
     context.axios.post(dc.userAddTestimony, data)
       .then(res => {
@@ -193,6 +212,22 @@ class apiCaller {
     } else {
       puller(false);
     }
+  }
+
+  //Delete testimony
+  userDelTestimonies(id, puller) {
+    //load from api and store it
+    let ui = auth.localUserObj();
+    context.axios.post(dc.userDelTestimony, {
+      token: ui.u_token,
+      t_id: id
+    })
+      .then(res => {
+        puller(res.data);
+      })
+      .catch(err => {
+        puller(false);
+      });
   }
 }
 

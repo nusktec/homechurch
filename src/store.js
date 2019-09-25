@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     user: false,
     notifications: [],
+    testimonies: false,
     title: 'Home'
   },
   mutations: {
@@ -18,6 +19,12 @@ export default new Vuex.Store({
     },
     updateNotifications(state, data) {
       state.notifications = data;
+    },
+    updateDp(state, data) {
+      state.user.u_avatar = data;
+    },
+    updateTestimonies(state, data) {
+      state.testimonies = data;
     }
   },
   actions: {},

@@ -25,10 +25,10 @@
             </d-collapse>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-nowrap px-3" v-d-toggle.user-actions>
-                <img class="user-avatar rounded-circle mr-2"
-                     :src="u_img" alt="User Avatar" v-if="u_img">
-                <span v-if="user" class="d-none d-md-inline-block">{{!user.u_gender==='M' ? 'Hi, Mr.':'Hi, '}}{{user.u_name.split(' ')[0]}}</span>
+            <a class="nav-link dropdown-toggle text-nowrap px-3 d-flex align-items-center"  v-d-toggle.user-actions>
+                <avatar :src="user.u_avatar!==0?this.$ApiCons.APP_URL+user.u_avatar:null" :size="40" inline
+                        :username="!user.u_name?'CA':user.u_name"></avatar>
+                <span v-if="user" class="ml-2 d-none d-md-inline-block">{{!user.u_gender==='M' ? 'Hi, Mr.':'Hi, '}}{{user.u_name.split(' ')[0]}}</span>
             </a>
             <d-collapse id="user-actions" class="dropdown-menu dropdown-menu-small">
                 <d-dropdown-item href="/profile"><i class="material-icons">&#xE7FD;</i> Profile</d-dropdown-item>
@@ -50,20 +50,19 @@
     }
 </style>
 <script>
+  import Avatar from 'vue-avatar';
   import { mapState } from 'vuex';
 
   export default {
+    components: {
+      Avatar
+    },
     data() {
       return {
-        u_img: require('@/assets/images/avatars/0.png'),
+        placeholder: require('@/assets/images/avatars/0.png'),
       };
     },
     computed: mapState(['user', 'notifications']),
-    watch: {
-      user: function (val) {
-        this.u_img = require('@/assets/images/avatars/' + val.u_avatar + '.jpg');
-      }
-    },
     methods: {
       clearNotifications() {
         let api = new this.$Api(this);

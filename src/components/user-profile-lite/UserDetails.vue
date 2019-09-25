@@ -7,9 +7,7 @@
 
                 <!-- User Avatar -->
                 <div class="mb-3 mx-auto">
-                    <img class="rounded-circle pimg" :src="u_img"
-                         :alt="userDetails.role"
-                         width="110">
+                    <avatar :src="user.u_avatar!==0?this.$ApiCons.APP_URL+user.u_avatar:null" :size="100" inline :username="!user.u_name?'CA':user.u_name"></avatar>
                 </div>
                 <!-- User Name -->
                 <p class="mb-0">{{ userDetails.u_name }}</p>
@@ -22,9 +20,11 @@
                             class="material-icons mr-1">note</i> Give Testimony
                     </d-button>
                 </router-link>
-                <d-button v-on:click="uploadDp" pill outline theme="secondary" size="sm" class="mb-2 ml-2"><i
+                <d-button :disabled="pwait" v-on:click="uploadDp" pill outline theme="secondary" size="sm"
+                          class="mb-2 ml-2"><i
                         class="material-icons">image</i>DP
                 </d-button>
+                <file-shooter :done="doneLoaded" :hidden="true" ref="fup"/>
             </d-card-header>
 
             <d-list-group flush>
@@ -87,8 +87,13 @@
 
 <script>
   //imports
+  import Avatar from 'vue-avatar';
   import validator from 'validator';
   import Util from './../../utils/';
+  import FileShooter from './../../components/extra/FileShooter';
+  import { mapState } from 'vuex';
+  import apiCaller from '../../data/apiCaller';
+  import util from '../../utils';
 
   const defaultUserDetails = {
     u_name: 'Please wait...',
@@ -100,6 +105,10 @@
 
   export default {
     name: 'user-details',
+    components: {
+      FileShooter,
+      Avatar
+    },
     props: {
       /**
        * The user details.
@@ -111,33 +120,46 @@
         },
       },
     },
+    computed: mapState(['user']),
     data() {
       return {
+        img: require('@/assets/images/avatars/0.png'),
         pass: {
           passOld: '',
           passNew1: '',
           passNew2: '',
         },
-        u_img: require('@/assets/images/avatars/0.png'),
         btnLoad: false,
         invalid: null,
         imgPath: this.$ApiCons.appFile.userAvatar,
+        pwait: false,
       };
     },
     watch: {
       userDetails: function (val) {
-        this.u_img = require('@/assets/images/avatars/' + val.u_avatar + '.jpg');
         this.userDetails = val === false ? {} : val;
       },
     },
     methods: {
       changePass: changePassword,
       comparePass: comparePassword,
-      uploadDp: updateAvatar,
-      onFile(file){
-        //load file here
-        console.log(file);
-        this.u_img = file.name;
+      uploadDp() {
+        this.$refs.fup.shooter();
+      },
+      doneLoaded(e) {
+        util.Util.alertBox(this, '', 'Uploading, Please wait !', 'warn', 5000);
+        this.pwait = true;
+        new apiCaller(this).userUpdateDp(e.base64, (data) => {
+          if (data.status) {
+            this.pwait = false;
+            util.Util.alertBox(this, '', 'Dp Uploaded !', 'success', 5000);
+            this.$store.commit('updateDp', data.data.img);
+          } else {
+            //unable to update img
+            this.pwait = false;
+            util.Util.alertBox(this, '', 'Unable to change dp, file too large', 'warn', 5000);
+          }
+        });
       }
     }
   };
@@ -153,7 +175,7 @@
   }
 
   //change dp
-  function updateAvatar() {
+  function updateAvatar(e) {
     //start imaging
 
   }
@@ -202,3 +224,19 @@
     });
   }
 </script>
+
+<style scoped>
+    .center-cropped {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .center-cropped img {
+        height: 100%;
+        min-width: 100%;
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+    }
+</style>

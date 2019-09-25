@@ -98,7 +98,7 @@ const router = new Router({
           name: 'home',
           component: UserHomeView,
           meta: {
-            title: 'Home',
+            title: 'Cell Finder',
             isAdmin: false,
           }
         },
@@ -108,6 +108,24 @@ const router = new Router({
           component: UserTestimonyView,
           meta: {
             title: 'Testimony',
+            isAdmin: false,
+          }
+        },
+        {
+          path: '/community',
+          name: 'community',
+          component: () => import('./views/Community.vue'),
+          meta: {
+            title: 'Testimony',
+            isAdmin: false,
+          }
+        },
+        {
+          path: '/find-locations',
+          name: 'find-locations',
+          component: () => import('./views/FindLocations.vue'),
+          meta: {
+            title: 'Find Locations',
             isAdmin: false,
           }
         },

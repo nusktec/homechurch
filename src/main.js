@@ -21,6 +21,7 @@ import router from './router';
 import store from './store';
 import Api from './data/ApiInstaller';
 import ApiCons from './data/ApiConstInstaller';
+import PageLoader from './components/extra/extraInstaller';
 
 ShardsVue.install(Vue);
 Vue.use(VueAxios, axios); //use axios library here
@@ -30,7 +31,8 @@ Vue.use(Notifications); //use notifications
 Vue.use(vueCountryRegionSelect); //use region selection
 Vue.use(Api, { ctx: this }); //use api global
 Vue.use(ApiCons); //use constant
-Vue.use(VModal, {dynamic: true, injectModalsContainer: true}); //use for modal calls
+Vue.use(VModal, {dynamic: true, injectModalsContainer: true, dialog: true}); //use for modal calls
+Vue.use(PageLoader);
 
 //Begin configurations
 Vue.config.productionTip = false;

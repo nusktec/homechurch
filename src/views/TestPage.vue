@@ -5,14 +5,27 @@
             <div class="error__content">
                 <p>Testing Buttons</p>
                 <d-button v-on:click="testData" size="sm" pill>&larr; Go Back</d-button>
+                <d-button v-on:click="testData2" size="sm" pill>&larr; Test 2</d-button>
+                <file-shooter ref="fp" :type="'pdf/*'" :done="getDone"/>
             </div>
         </div>
     </d-container>
 </template>
 <script>
+  import FileShooter from './../components/extra/FileShooter';
+
   export default {
+    components: {
+      FileShooter
+    },
     methods: {
+      testData2(){
+        this.$refs.fp.shooter();
+      },
       testData: testAxios,
+      getDone(e) {
+        console.log(e);
+      }
     }
   };
 
@@ -37,20 +50,21 @@
     email: 'churcha2z21@test.com',
     password: '12345',
   };
-    let us = {
-      token: tKey,
-       us_address: "This is my new address",
-       us_country: "Nigeria", 
-      us_desc: "My new description", 
-      us_email: "church1a2@gmail.com",
-      us_logo: "http://google.com/logo.png",
-       us_state: "FCT",
-       us_title: "Intl Dunamis church",
-      s_id: 1,
-      isNew: true,
-      us_password: "12345",
-      identity: "DLRVB2ISJ",
-    };
+  let us = {
+    token: tKey,
+    us_address: 'This is my new address',
+    us_country: 'Nigeria',
+    us_desc: 'My new description',
+    us_email: 'church1a2@gmail.com',
+    us_logo: 'http://google.com/logo.png',
+    us_state: 'FCT',
+    us_title: 'Intl Dunamis church',
+    s_id: 1,
+    isNew: true,
+    us_password: '12345',
+    identity: 'DLRVB2ISJ',
+  };
+
   //testing data
   function testAxios() {
     let ssk = '801fe414298dc26cbd0f7f52cca001fc928142bd';
@@ -63,7 +77,10 @@
       pass1: '123456',
       pass2: '12345'
     }; //church_data; //{email: 'church@church.com', password: '12345'};
-    this.axios.post('http://api.churcha2z.org/services/login/?ssk=' + ssk, {email: "church1a2@gmail.com", password: "12345"})
+    this.axios.post('http://api.churcha2z.org/services/login/?ssk=' + ssk, {
+      email: 'church1a2@gmail.com',
+      password: '12345'
+    })
       .then((res) => {
         console.log(res.data);
       })
