@@ -56,7 +56,7 @@
                                              placeholder="Re-enter password"/>
                                 </d-input-group>
                                 <d-input-group>
-                                    <d-btn v-on:click="onSubmit" class="btn-block btn-danger">Register</d-btn>
+                                    <d-btn :disabled="disabled" v-on:click="onSubmit" class="btn-block btn-danger">Register</d-btn>
                                 </d-input-group>
                             </d-form>
                             -OR-
@@ -141,7 +141,7 @@
     }
     //set data progress to disabled
     this.disabled = true;
-    Util.Util.alertBox(this, '', 'Please wait, processing registration...', 'info', 3000);
+    Util.Util.alertBox(this, '', 'Please wait, processing registration...', 'info', 8000);
     let controller = new data.apiCaller(this);
     controller.userCreate(this.$data, (data) => {
       if (data) {

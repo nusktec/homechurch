@@ -7,7 +7,7 @@
 
                 <!-- User Avatar -->
                 <div class="mb-3 mx-auto">
-                    <avatar :src="user.u_avatar!==0?this.$ApiCons.APP_URL+user.u_avatar:null" :size="100" inline :username="!user.u_name?'CA':user.u_name"></avatar>
+                    <avatar :src="user.u_avatar.length>5?this.$ApiCons.APP_URL+user.u_avatar:null" :size="100" inline :username="!user.u_name?'CA':user.u_name"></avatar>
                 </div>
                 <!-- User Name -->
                 <p class="mb-0">{{ userDetails.u_name }}</p>

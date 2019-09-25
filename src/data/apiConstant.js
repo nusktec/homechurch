@@ -1,12 +1,12 @@
 /**
  Author: Revelation Ben
  Company: RSC Byte Limited
- Email: nusktecsoft@gmail.com
+ Email: nusktecsoft@gmail.com
  Phone: 2348164242320
  **/
 const SSK = 'c783aa9384f9c329678c005a28c55c95bfb62df4';
-//const API_URL = 'http://localhost:3000';
-const API_URL = 'http://hmcapi.churcha2z.org/';
+const API_URL = 'http://localhost:3000';
+//const API_URL = 'http://hmcapi.churcha2z.org/';
 // export default
 let Apis = {
   APP_URL: API_URL,

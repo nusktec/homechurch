@@ -26,7 +26,7 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-nowrap px-3 d-flex align-items-center"  v-d-toggle.user-actions>
-                <avatar :src="user.u_avatar!==0?this.$ApiCons.APP_URL+user.u_avatar:null" :size="40" inline
+                <avatar :src="user.u_avatar.length>5?this.$ApiCons.APP_URL+user.u_avatar:null" :size="40" inline
                         :username="!user.u_name?'CA':user.u_name"></avatar>
                 <span v-if="user" class="ml-2 d-none d-md-inline-block">{{!user.u_gender==='M' ? 'Hi, Mr.':'Hi, '}}{{user.u_name.split(' ')[0]}}</span>
             </a>
