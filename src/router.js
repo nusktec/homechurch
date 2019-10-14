@@ -129,6 +129,15 @@ const router = new Router({
             isAdmin: false,
           }
         },
+          {
+              path: '/submit-home',
+              name: 'submit-home',
+              component: () => import('./views/SubmitHome.vue'),
+              meta: {
+                  title: 'Submit Home',
+                  isAdmin: false,
+              }
+          },
         {
           path: '/profile',
           name: 'profile',
