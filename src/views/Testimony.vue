@@ -17,9 +17,9 @@
     </div>
     <page-loader :hide="loader" />
     <div class="row py-2 my-2">
-        <div v-for="(item, key) in testimonies" class="col-lg-4 col-sm-12 col-md-4 mb-4" v-bind:key="item">
-            <div :key="key" class="card">
-                <div class="card-header" style="background-image: linear-gradient(to right, #790c24 , #dd1041)">
+        <div v-for="(item, key) in testimonies" class="col-lg-2 col-sm-12 col-md-4 mb-4" v-bind:key="item">
+            <div :key="key" class="card shadow-lg">
+                <div class="card-header" style="background-image: linear-gradient(to right, #5A6169 , #4b5158)">
                     <h5 class="text-white">#{{key+1}} - Testimony</h5>
                 </div>
                 <div class="card-body">
