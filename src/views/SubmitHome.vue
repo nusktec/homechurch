@@ -25,17 +25,19 @@
                                             <d-col md="12" class="form-group">
                                                 <label for="feEmailAddress">Home ID</label>
                                                 <d-input id="feEmailAddress" type="text" placeholder="Home ID"
-                                                        v-model="hId" :value="'HC'+Math.floor(Math.random()*999999)+1"/>
+                                                         v-model="hId"/>
                                             </d-col>
                                         </d-form-row>
                                         <d-form-row>
                                             <d-col md="4" class="form-group">
                                                 <label for="feEmailAddress">Full Name</label>
-                                                <d-input v-model="hName" id="feEmailAddress" type="name" placeholder="Full Name"/>
+                                                <d-input v-model="hName" id="feEmailAddress" type="name"
+                                                         placeholder="Full Name"/>
                                             </d-col>
                                             <d-col md="4" class="form-group">
                                                 <label for="feEmailAddress">Email</label>
-                                                <d-input v-model="hEmail" id="feEmailAddress" type="email" placeholder="Email"/>
+                                                <d-input v-model="hEmail" id="feEmailAddress" type="email"
+                                                         placeholder="Email"/>
                                             </d-col>
                                             <d-col md="4">
                                                 <label for=er>Phone</label>
@@ -51,7 +53,8 @@
 
                                         <div class="form-group">
                                             <label for="feInputAddress">Room details</label>
-                                            <d-input v-model="hrDetails" id="feInputAddress" placeholder="Capacity, Room Size,..."/>
+                                            <d-input v-model="hrDetails" id="feInputAddress"
+                                                     placeholder="Capacity, Room Size,..."/>
                                         </div>
 
                                         <d-form-row>
@@ -100,7 +103,7 @@
         },
         data(){
             return {
-                hId: "",
+                hId: 'HC' + Math.floor(Math.random() * 999999) + 1,
                 hName: "",
                 hPhone: "",
                 hEmail: "",
@@ -122,12 +125,12 @@
     };
 
     function readySubmit() {
-        if(Util.Util.checkJSONValuesNoFalse(this.$data)) {
+        if (Util.Util.checkJSONValuesNoFalse(this.$data)) {
             Util.Util.alertBox(this, '', 'Home submitted for approval, will notify you shortly....', 'success', 3000);
             this.$data.hName = "";
             this.$data.hEmail = "";
             this.$data.h = "";
-        }else{
+        } else {
             Util.Util.alertBox(this, '', 'Please complete the form before submission', 'warn', 3000);
         }
     }

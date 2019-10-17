@@ -116,7 +116,7 @@ const router = new Router({
           name: 'community',
           component: () => import('./views/Community.vue'),
           meta: {
-            title: 'Testimony',
+            title: 'Community',
             isAdmin: false,
           }
         },
